@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Libros</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body { background: #f3f3f3; }
+
+    .search-box {
+      max-width: 350px;
+    }
+  </style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="/">📚 LibrosApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/crear">Registrar libro</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+
+  <h1 class="text-center mb-4">📚 Lista de Libros</h1>
+
+  <!-- BUSCADOR -->
+  <div class="mb-3 d-flex justify-content-end">
+    <input id="search" class="form-control search-box" placeholder="Buscar...">
+  </div>
+
+  <div class="card shadow">
+    <div class="card-body">
+
+      <table id="tablaLibros" class="table table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Año</th>
+            <th>ISBN</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% libros.forEach(libro => { %>
+          <tr>
+            <td><%= libro.id %></td>
+            <td><%= libro.titulo %></td>
+            <td><%= libro.autor %></td>
+            <td><%= libro.anio %></td>
+            <td><%= libro.isbn %></td>
+            <td>
+              <a href="/editar/<%= libro.id %>" class="btn btn-warning btn-sm me-2">
+                <i class="bi bi-pencil"></i>
+              </a>
+
+              <form action="/eliminar/<%= libro.id %>" method="POST" style="display:inline;">
+                <button class="btn btn-danger btn-sm">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // BÚSQUEDA DE LIBROS
+  const searchInput = document.getElementById("search");
+  const rows = document.querySelectorAll("#tablaLibros tbody tr");
+
+  searchInput.addEventListener("keyup", e => {
+    let texto = e.target.value.toLowerCase();
+    rows.forEach(row => {
+      row.style.display = row.innerText.toLowerCase().includes(texto) ? "" : "none";
+    });
+  });
+</script>
+
+</body>
