@@ -1,0 +1,30 @@
+# --- ENTORNO VIRTUAL ---
+venv/
+ENV/
+env/
+.venv/
+
+# --- BASES DE DATOS DE DESARROLLO ---
+db.sqlite3
+db.sqlite3-journal
+
+# --- ARCHIVOS COMPILADOS DE PYTHON ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- CONFIGURACIÓN DE DJANGO ---
+*.log
+*.pot
+*.pyc
+*.pyo
+*.mo
+
+# --- ARCHIVOS DE EDITOR / OS ---
+*.DS_Store
+Thumbs.db
+
+# --- ARCHIVOS DE IDE ---
+.vscode/
+.idea/
+*.swp
